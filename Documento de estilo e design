@@ -1,0 +1,46 @@
+Documento de estilo e design
+
+Nomes:
+-Todas as variáveis devem ter seus nomes em inglês
+-Todos os branches, commits e issues podem ser escritos em português, para melhor compreensão do time.
+-Os nomes de variáveis e métodos devem ser escritos na regra snake_case, com nomes significativos:
+  1. this_is_a_variable
+  2. def method_one
+-Os nomes de classes devem seguir a regra CamelCase:
+  1. class MyClass
+
+
+Strings:
+-Deve-se usar aspas duplas("") em vez de ('') em todos os casos possíveis.
+  1. teste = "My new string with double quotes"
+  
+-Deve-se usar o padrão Rails para a criação de strings com os valores de outras variáveis:
+  1. variable = "The value of the other variable is #{other_variable}."
+
+
+Parenteses:
+-Deve-se utilizar em todos os seguintes casos:
+  1. Condicionais: if(t == a and t == b)
+  2. Utilização de funções definidas pela equipe: def my_method(argument)
+  3. Funções da classe: a.find(something)  /  Class.new(params)  /  Class.create(params)
+  
+-Não devem ser utilizados em:
+  1. Blocos: my_array.each do | variable |
+  2. Repetições: for variable in another_variable do
+  3. Validações: validates :symbol, presence: true
+  4. Associações do BD: has_many :something  /  belongs_to :someone
+  5. Links: link_to "Text", destiny  /  redirect_to some_place
+  6. Impressoes no terminal: puts my_variable
+
+
+Espaçamento:
+-Deve-se have um espaço em branco (' ') após cada variável, em chamadas de métodos
+  1. if(t == a) #espaço entre o t e o igual e entre o igual e o a
+  2. my_method(argument1, argument2) #após a vírgula, nesse caso.
+  
+-Não deve haver uma quebra de linha extra entre a declarção de uma função e o início do 'código', propriamente dito:
+  1.  if(t == a)  /  def my_function
+        something here
+        something else
+      end
+  
