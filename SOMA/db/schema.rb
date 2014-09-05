@@ -11,6 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20140905212142) do
+
+  create_table "users", :force => true do |t|
+    t.string   "rg"
+    t.string   "issuing_agency"
+    t.string   "cpf"
+    t.string   "name"
+    t.string   "zip_code"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "email"
+    t.string   "type"
+    t.string   "login"
+    t.string   "password"
+    t.string   "confirm_password"
+    t.string   "address"
+    t.boolean  "activated",        :default => false
+    t.boolean  "admin",            :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
 
 end
