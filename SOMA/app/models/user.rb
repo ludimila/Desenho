@@ -4,21 +4,23 @@ class User < ActiveRecord::Base
   validates :cpf, uniqueness: true, length: {is: 11}, presence: true
   validate :check_cpf
   
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, format: {with: EMAIL_REGEX }, uniqueness: true
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
+  validates :email, format: {with: EMAIL_REGEX }, uniqueness: true, presence: true
 
-  validates :issuing_agency, length: {in: 5..20}, presence: true
+  ISSUE_AGENCY_REGEX = /\A[A-Z]+\z/
+  validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: ISSUE_AGENCY_REGEX, message: "Use somente letras MAIUSCULAS."} 
   
-  validates :name, presence: true
+  validates :name, presence: true, length: {minimum: 10}
   
-  validates :password, length: {minimum: 5}
+  #validates :password, length: {minimum: 5}
   
-  validates :phone1, length: {in: 10..11}, presence: true, numericality: { :only_integer => true }
-  validates :phone2, length: {in: 10..11}, presence: true, numericality: { :only_integer => true }
+  validates :phone1, length: {in: 10..11}, presence: true, numericality: {only_integer: true}
+  validates :phone2, length: {in: 10..11}, numericality: {only_integer: true}
  
-  validates :rg, length: {in: 3..11}, presence: true, uniqueness: true, numericality: { :only_integer => true }
+  validates :rg, length: {in: 3..11}, presence: true, uniqueness: true, numericality: {only_integer: true}
   
-  validates :zip_code, presence: true, length: {is: 8}
+  validates :zip_code, presence: true, length: {is: 8}, numericality: {only_integer: true}
+
   
   def check_cpf
     if(!validate_cpf(self.cpf))
@@ -29,26 +31,40 @@ class User < ActiveRecord::Base
   private
     def validate_cpf(cpf = nil)
       valid = false
-      if(!cpf.nil?)
+      if(!cpf.blank?)
         params = {}
-        test_cpf = cpf.from(0).to(8)
-        values = [10, 9, 8, 7, 6, 5, 4, 3, 2]
-        params[:test_cpf] = test_cpf
-        params[:values] = values
-        params = cpf_algorithm(params)
-        if(params[:test_cpf].last != cpf[9])
-          valid = false
-          return
-        else
+        valid = compare_digits(cpf)
+        if(valid)
+          test_cpf = cpf.from(0).to(8)
+          values = [10, 9, 8, 7, 6, 5, 4, 3, 2]
+          params[:test_cpf] = test_cpf
+          params[:values] = values
           params = cpf_algorithm(params)
-          if(params[:test_cpf] == cpf)
-            valid = true
+          if(params[:test_cpf].last != cpf[9])
+            valid = false
+          else
+            params = cpf_algorithm(params)
+            if(params[:test_cpf] == cpf)
+              valid = true
+            end
           end
         end
       end
       valid
     end
   
+    def compare_digits(cpf)
+      may_be_valid = false
+      range = 0..cpf.size-2
+      for i in range do
+        may_be_valid = !(cpf[i] == cpf[i+1])
+        if(may_be_valid)
+          return may_be_valid 
+        end
+      end
+      may_be_valid
+    end
+
     def cpf_algorithm(params = {})
       sum = 0
       params[:values].each_with_index do | value, index |
