@@ -23,6 +23,7 @@ Parenteses:
   1. Condicionais: if(t == a and t == b)
   2. Utilização de funções definidas pela equipe: def my_method(argument)
   3. Funções da classe: a.find(something)  /  Class.new(params)  /  Class.create(params)
+  4. Funcoes de formularios: form_for(@user)  /  fields_for(@other_model)
   
 -Não devem ser utilizados em:
   1. Blocos: my_array.each do | variable |
