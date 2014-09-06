@@ -1,0 +1,39 @@
+<h1> Criar Novo Usuário </h1>
+
+<div class="row">
+  <div class="col-lg-offset-3 col-sm-6 col-md-6">
+    <%= form_for(@user) do |f| %>
+
+      <%= f.label :name,"Nome Completo", class: "required" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email, class: "required" %>
+      <%= f.text_field :email %>
+
+      <%= f.label :cpf, "CPF",  class: "required" %>
+      <%= f.text_field :cpf %>
+
+      <%= f.label :rg, "RG", class: "required" %>
+      <%= f.text_field :rg %>
+
+      <%= f.label :issuing_agency, "Orgao Emissor", class: "required" %>
+      <%= f.text_field :issuing_agency %>
+  
+      <%= f.label :phone1, "Telefone", class: "required" %>
+      <%= f.text_field :phone1 %>
+
+      <%= f.label :phone2, "Telefone Alternativo", class: "required" %>
+      <%= f.text_field :phone2 %>
+
+      <%= f.label :zip_code, "CEP", class: "required" %>
+      <%= f.text_field :zip_code %>
+
+      <%= f.label :address, "Endereço" %>
+      <%= f.text_field :address, disabled: true %>
+
+      <%= link_to "PagSeguro", "#", class: "btn" %>
+
+      <div class="center"> <%= f.submit "Criar conta", class: "btn btn-default btn-medium btn-primary" %> </div>
+    <% end %>
+  </div>
+</div>
