@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessible :cpf, :email, :issuing_agency, :name, :phone1, :phone2, :rg, :zip_code
-  
   validates :cpf, uniqueness: true, length: {is: 11}, presence: true
   validate :check_cpf
   
