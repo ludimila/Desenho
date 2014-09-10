@@ -33,9 +33,10 @@
       <%= f.label :address, "Endereço" %>
       <%= f.text_field :address, disabled: true %>
 
-      <%= link_to "PagSeguro", "#", class: "btn" %>
-
-      <div class="center"> <%= f.submit "Criar conta", class: "btn btn-default btn-medium btn-primary" %> </div>
+      <div class="center">
+        <%= f.submit "Criar conta", class: "btn btn-default btn-medium btn-primary" %>
+        <%= link_to "Cancelar", root_path, class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>

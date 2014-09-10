@@ -13,6 +13,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def index
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email) 
