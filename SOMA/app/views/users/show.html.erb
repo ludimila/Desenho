@@ -1,0 +1,16 @@
+<div class="row">
+    <aside class="span12">
+      <section>
+       <h1>
+          <%= "#{@user.name}\n" %>
+        </h1>
+        <h2 class="left">
+          <% if @user.admin? %>
+              Administrador do Sistema
+          <% end %>
+        </h2>
+      </section>
+    </aside>
+  </div>
+
+

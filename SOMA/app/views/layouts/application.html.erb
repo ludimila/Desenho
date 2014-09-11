@@ -7,14 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="alert <%= bootstrap_class_for(key) %>" role="alert"><%= value %></div>
-  <% end %>
 
-  <%= yield %>
+  <%= render "layouts/header" %>
 
-  <%= debug(params) if Rails.env.development? %>
-</div>
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert <%= bootstrap_class_for(key) %>" role="alert"><%= value %></div>
+    <% end %>
+
+    <%= yield %>
+
+    <%= debug(params) if Rails.env.development? %>
+  </div>
+
 </body>
 </html>
