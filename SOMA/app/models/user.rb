@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   
   validates :name, presence: true, length: {minimum: 10}
   
+  has_secure_password
   #validates :password, length: {minimum: 5}
   
   validates :phone1, length: {in: 10..11}, presence: true, numericality: {only_integer: true}
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   
   validates :zip_code, presence: true, length: {is: 8}, numericality: {only_integer: true}
 
+  validates :login, uniqueness: true
   
   def check_cpf
     if(!validate_cpf(self.cpf))
@@ -76,5 +78,18 @@ class User < ActiveRecord::Base
       end
       params[:values].unshift(11)
       params
+    end
+
+    def self.create_admin
+      admin = User.find_by(login: "admin")
+      if(admin.nil?)
+        admin = User.new(
+        login: "admin",
+        password: "admin",
+        password_confirmation: "admin",
+        admin: true)
+        admin.save(validate: false)
+      end
+      admin
     end
 end

@@ -11,8 +11,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :type
       t.string :login
-      t.string :password
-      t.string :confirm_password
+      t.string :password_digest
       t.string :address
       t.boolean :activated, default: false
       t.boolean :admin, default: false
