@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
   validates :email, format: {with: EMAIL_REGEX }, uniqueness: true, presence: true
 
-  ISSUE_AGENCY_REGEX = /\A[A-Z]+\z/
-  validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: ISSUE_AGENCY_REGEX, message: "Use somente letras MAIUSCULAS."} 
+  CAPITAL_LETTER_REGEX = /\A[A-Z]+\z/
+  validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: CAPITAL_LETTER_REGEX, message: "Use somente letras MAIUSCULAS."} 
   
   validates :name, presence: true, length: {minimum: 10}
 
@@ -21,7 +21,10 @@ class User < ActiveRecord::Base
   validates :zip_code, presence: true, length: {is: 8}, numericality: {only_integer: true}
 
   validates :login, uniqueness: true
-  
+
+  validates :number, length: {maximum: 6}, numericality: {only_integer: true}
+  validates :state, length: {in: 2..3}, format: {with: CAPITAL_LETTER_REGEX, message: "Duas Letras Maiusculas"}
+
   def check_cpf
     if(!validate_cpf(self.cpf))
       errors.add(:cpf, "invalido")
