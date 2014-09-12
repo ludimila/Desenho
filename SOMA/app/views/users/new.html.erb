@@ -6,44 +6,29 @@
 
       <%= render "errors" %>
 
-      <%= f.label :name,"Nome Completo", class: "required" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, placeholder:"Nome Completo",
+       class: "required", class: "form-control input-lg" %>
+      
+      <%= f.text_field :email, placeholder:"Email", 
+      class: "required", class: "form-control input-lg"  %>
+     
+      <%= f.text_field :cpf, placeholder:"CPF",  
+      class: "required" , class: "form-control input-lg", maxlength: 11 %>
 
-      <%= f.label :email, class: "required" %>
-      <%= f.text_field :email %>
+      <%= f.text_field :rg, placeholder:"RG",
+      class: "required",class: "form-control input-lg", maxlength: 11 %>
 
-      <%= f.label :cpf, "CPF",  class: "required" %>
-      <%= f.text_field :cpf, maxlength: 11%>
-
-      <%= f.label :rg, "RG", class: "required" %>
-      <%= f.text_field :rg , maxlength: 11 %>
-
-      <%= f.label :issuing_agency, "Orgao Emissor", class: "required" %>
-      <%= f.text_field :issuing_agency, maxlength: 11%>
+      <%= f.text_field :issuing_agency, placeholder: "Orgao Emissor", 
+      class: "required", class: "form-control input-lg", maxlength: 11 %>
   
-      <%= f.label :phone1, "Telefone", class: "required" %>
-      <%= f.phone_field :phone1, maxlength: 11 %>
+      <%= f.text_field :phone1, placeholder:"Telefone", 
+       class: "required",class: "form-control input-lg", maxlength: 11 %>
 
-      <%= f.label :phone2, "Telefone Alternativo" %>
-      <%= f.text_field :phone2, maxlength: 11 %>
+      <%= f.text_field :phone2, placeholder: "Telefone Alternativo", 
+      class: "required" , class: "form-control input-lg",maxlength: 11 %>
 
-      <%= f.label :zip_code, "CEP", class: "required" %>
-      <%= f.text_field :zip_code, maxlength: 8 %>
-
-      <%= f.label :street, "Logradouro" %>
-      <%= f.text_field :street, disabled: true %>
-
-      <%= f.label :number, "Numero" %>
-      <%= f.text_field :number, maxlength: 5 %>
-
-      <%= f.label :district, "Bairro" %>
-      <%= f.text_field :district, disabled: true %>
-
-      <%= f.label :city, "Cidade" %>
-      <%= f.text_field :city, disabled: true %>
-
-      <%= f.label :state, "Estado" %>
-      <%= f.text_field :state, maxlength: 3,  disabled: true %>
+      <%= f.text_field :zip_code, placeholder: "CEP",  
+      class: "required", class: "form-control input-lg", maxlength: 8  %>
 
       <div class="center">
         <%= f.submit "Criar conta", class: "btn btn-default btn-medium btn-primary" %>
