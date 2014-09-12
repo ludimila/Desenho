@@ -4,9 +4,9 @@
        <h1>
           <%= "#{@user.name}\n" %>
         </h1>
-        <h2 class="left">
+        <h2>
           <% if @user.admin? %>
-              Administrador do Sistema
+            <%= render "users/admin/show" %>
           <% end %>
         </h2>
       </section>

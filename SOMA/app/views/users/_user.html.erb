@@ -1,0 +1,11 @@
+<li>
+
+  <%= link_to user.name, user %>
+  <% if(current_user.admin? and !current_user?(user)) %>
+    <% if(user.activated?) %>
+      | <%= link_to "Desativar!", deactivate_path(user) , data: { confirm: "Tem certeza?" } %>
+    <% else %>
+      | <%= link_to "Ativar Usuário!", activate_path(user) , data: { confirm: "Tem certeza?" } %>
+    <% end %> 
+  <% end %>
+</li>
