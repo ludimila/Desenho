@@ -17,11 +17,12 @@ module SessionsHelper
   end
 
   def signed_in?
-    !current_user.nil?
+    !session[:remember_token].nil?
   end
 
   def sign_out
     cookies.delete(:remember_token)
+    session[:remember_token] = nil
     self.current_user = nil
   end
   

@@ -2,7 +2,9 @@
   <div class="container">
     <h1>SOMA</h1>
     <nav class="pull-right">
-      <%= link_to "Sair", signout_path %>
+      <% if(signed_in?) %>
+        <%= link_to "Sair", signout_path, method: "delete" %>
+      <% end %>
     </nav>
   </div>
 </header>
