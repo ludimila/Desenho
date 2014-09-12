@@ -2,13 +2,13 @@
 <html>
   <%= form_for(:session, url: sessions_path) do |f| %>
     
-    <%= f.label :login %>
-    <%= f.text_field :login, class: "input-group" %>
+    <input type="text" class="form-control input-lg" placeholder="Email", class: "input-group" >
+    <input type="password" class="form-control input-lg" placeholder="Senha", class: "input-goup">
+    <button class="btn btn-primary btn-lg btn-block">Entrar</button>
 
-    <%= f.label :senha %>
-    <%= f.password_field :password %>
-
-    <div class="right"><%= f.submit "Entrar", class: "btn btn-medium btn-primary" %> </div>
   <% end %>
 
 </html>
+
+
+  
