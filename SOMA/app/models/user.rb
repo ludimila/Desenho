@@ -79,18 +79,4 @@ class User < ActiveRecord::Base
       params[:values].unshift(11)
       params
     end
-
-    def self.create_admin
-      admin = User.find_by(login: "admin")
-      if(admin.nil?)
-        admin = User.new(
-        login: "admin",
-        password: "admin",
-        password_confirmation: "admin",
-        admin: true,
-        activated: true)
-        admin.save(validate: false)
-      end
-      admin
-    end
 end
