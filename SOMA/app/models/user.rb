@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: ISSUE_AGENCY_REGEX, message: "Use somente letras MAIUSCULAS."} 
   
   validates :name, presence: true, length: {minimum: 10}
-  
+
   has_secure_password
   #validates :password, length: {minimum: 5}
   
@@ -87,7 +87,8 @@ class User < ActiveRecord::Base
         login: "admin",
         password: "admin",
         password_confirmation: "admin",
-        admin: true)
+        admin: true,
+        activated: true)
         admin.save(validate: false)
       end
       admin
