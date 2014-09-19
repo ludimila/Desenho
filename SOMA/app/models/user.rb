@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates :login, uniqueness: true
 
   validates :number, length: {maximum: 6}, numericality: {only_integer: true}
-  validates :state, length: {in: 2..3}, format: {with: CAPITAL_LETTER_REGEX, message: "Duas Letras Maiusculas"}
+  validates :state, length: {in: 2..3}, format: {with: CAPITAL_LETTER_REGEX, message: "Use Duas Letras Maiusculas"}
 
   def check_cpf
     if(!validate_cpf(self.cpf))
