@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def activate
-    if(@user.update_columns(activated: true, activated_at: Time.now))
+    if(@user.update_columns(activated: true, activated_at: Date.current))
       flash[:success] = "O usuario '#{@user.name}' foi ativado com sucesso."
     else
       flash[:error] = "O usuario '#{@user.name}' nao pode ser ativado."
@@ -34,9 +34,13 @@ class UsersController < ApplicationController
 
   def deactivate
     if(@user.update_columns(activated: false, activated_at: nil))
-      flash[:success] = "O usuario '#{@user.name}' foi desativado com sucesso."
+      if(current_user and current_user.admin?)
+        flash[:notice] = "O usuario '#{@user.name}' foi desativado com sucesso."
+      end
     else
-      flash[:error] = "O usuario '#{@user.name}' nao pode ser desativado."
+      if(current_user and current_user.admin?)
+        flash[:error] = "O usuario '#{@user.name}' nao pode ser desativado."
+      end
     end
     redirect_to current_user
   end
