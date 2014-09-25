@@ -4,7 +4,7 @@ namespace :db do
     admin = User.find_by(login: "admin")
     if(admin.nil?)
       admin = User.new(name: "Administrador", login: "admin", password: "admin",
-                 password_confirmation: "admin", admin: true, activated: true)
+                 password_confirmation: "admin", admin: true, activated: true, activated_at: Date.current.last_year)
       admin.save(validate: false)
     end
 
