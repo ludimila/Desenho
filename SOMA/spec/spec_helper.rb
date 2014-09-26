@@ -1,5 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
@@ -41,7 +41,7 @@ RSpec.configure do |config|
   config.full_backtrace = true
   
   # Regex to avaid a backtrace line
-  config.backtrace_clean_patterns << /vendor\//
+  config.backtrace_exclusion_patterns << /vendor\//
   
   # Include a module. These methods will be available in 'it', 'specify'
   config.include Module.new

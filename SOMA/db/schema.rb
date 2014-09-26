@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912182725) do
+ActiveRecord::Schema.define(version: 20140925163022) do
 
   create_table "users", force: true do |t|
     t.string   "rg"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140912182725) do
     t.boolean  "admin",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.time     "activated_at"
+    t.date     "activated_at"
     t.string   "street"
     t.string   "number"
     t.string   "complement"

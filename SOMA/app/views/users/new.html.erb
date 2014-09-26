@@ -7,34 +7,34 @@
       <%= render "errors" %>
 
       <%= f.label :name,"Nome Completo", class: "required" %>
-      <%= f.text_field :name, required: true  %>
+      <%= f.text_field :name %>
 
       <%= f.label :email, class: "required" %>
-      <%= f.text_field :email, required: true %>
+      <%= f.text_field :email %>
 
       <%= f.label :cpf, "CPF",  class: "required" %>
-      <%= f.text_field :cpf, maxlength: 11, required: true %>
+      <%= f.text_field :cpf, maxlength: 11%>
 
       <%= f.label :rg, "RG", class: "required" %>
-      <%= f.text_field :rg , maxlength: 11, required: true %>
+      <%= f.text_field :rg , maxlength: 11 %>
 
       <%= f.label :issuing_agency, "Orgao Emissor", class: "required" %>
-      <%= f.text_field :issuing_agency, maxlength: 11, required: true %>
+      <%= f.text_field :issuing_agency, maxlength: 11%>
   
       <%= f.label :phone1, "Telefone", class: "required" %>
-      <%= f.text_field :phone1, maxlength: 11, required: true %>
+      <%= f.phone_field :phone1, maxlength: 11 %>
 
       <%= f.label :phone2, "Telefone Alternativo" %>
       <%= f.text_field :phone2, maxlength: 11 %>
 
       <%= f.label :zip_code, "CEP", class: "required" %>
-      <%= f.text_field :zip_code, maxlength: 8, required: true %>
+      <%= f.text_field :zip_code, maxlength: 8 %>
 
       <%= f.label :street, "Logradouro" %>
       <%= f.text_field :street, disabled: true %>
 
       <%= f.label :number, "Numero" %>
-      <%= f.text_field :number, maxlength: 5, required: true %>
+      <%= f.text_field :number, maxlength: 5 %>
 
       <%= f.label :district, "Bairro" %>
       <%= f.text_field :district, disabled: true %>

@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #validates :password, length: {minimum: 5}
   
   validates :phone1, length: {in: 10..11}, presence: true, numericality: {only_integer: true}
-  validates :phone2, length: {in: 10..11}, numericality: {only_integer: true}
+  validates :phone2, length: {in: 10..11}, numericality: {only_integer: true}, allow_blank: true
  
   validates :rg, length: {in: 3..11}, presence: true, uniqueness: true, numericality: {only_integer: true}
   
