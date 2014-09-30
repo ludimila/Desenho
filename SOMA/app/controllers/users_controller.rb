@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  require "httparty"
   before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -7,6 +9,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.password = "provisoria"
+
+    if(params[:user][:street].nil?)
+      @user = get_address(params[:user][:zip_code], @user)
+    end
+
     if(@user.login.blank?)
       @user.login = @user.email
     end
@@ -61,7 +68,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :number, :state) 
+      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :street, :number, :district, :city, :state)
     end
 
     def get_user
@@ -73,5 +80,15 @@ class UsersController < ApplicationController
         flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
         redirect_to current_user
       end
+    end
+
+    def get_address(zip_code, user)
+      puts "=", zip_code, "="
+      address = HTTParty.get("http://cep.correiocontrol.com.br/#{zip_code}.json")
+      user.street = address["logradouro"]
+      user.district = address["bairro"]
+      user.city = address["localidade"]
+      user.state = address["uf"]
+      user
     end
 end
