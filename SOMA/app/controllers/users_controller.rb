@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   require "httparty"
-  before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create]
+  before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create, :index]
 
   def new
     @user = User.new
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.password = "provisoria"
 
-    if(params[:user][:street].nil?)
+    if(!params[:user][:zip_code].blank?)
       @user = get_address(params[:user][:zip_code], @user)
     end
 
@@ -83,12 +83,15 @@ class UsersController < ApplicationController
     end
 
     def get_address(zip_code, user)
-      puts "=", zip_code, "="
-      address = HTTParty.get("http://cep.correiocontrol.com.br/#{zip_code}.json")
-      user.street = address["logradouro"]
-      user.district = address["bairro"]
-      user.city = address["localidade"]
-      user.state = address["uf"]
+      if(!zip_code.blank?)
+        address = HTTParty.get("http://cep.correiocontrol.com.br/#{zip_code}.json")
+        if(!address.blank?)
+          user.street = address["logradouro"]
+          user.district = address["bairro"]
+          user.city = address["localidade"]
+          user.state = address["uf"]
+        end
+      end
       user
     end
 end
