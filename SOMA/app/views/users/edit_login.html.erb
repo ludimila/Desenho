@@ -1,0 +1,19 @@
+<h1> Alterar Login </h1>
+
+<%= form_for(@user,url:"update_login") do |f| %>
+
+	<%= render "errors" %>
+
+	<%= f.label :login, "Alterar Login ", class: "required" %>
+	<%= f.text_field :login %>
+
+	<%= f.label :password, "Alterar Senha ", class: "required" %>
+	<%= f.password_field :password %>
+
+	<%= f.label :password_confirmation, "Confirmar Senha ", class: "required" %>
+	<%= f.password_field :password_confirmation %>
+
+	<%= f.submit "Confirmar", class: "btn btn-default btn-medium bnt-primary" %>
+	<%= link_to "Cancelar", @user, class: "btn bnt-primary" %>
+
+<% end %>

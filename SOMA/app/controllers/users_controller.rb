@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def edit
   end
-  
+
   def update
     if(@user.update(user_params))
       flash[:success] = "Atualização feita com sucesso."
@@ -59,11 +59,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_login
+    @user.update(user_login)
+    flash[:success] = "Login Alterado com sucesso!"
+    redirect_to @user
+  end
+
+  def edit_login
+
+  end  
+    
   private
     def user_params
       params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :number, :state) 
     end
 
+    def user_login
+      params.require(:user).permit(:login,:password,:password_confirmation)
+    end
     def get_user
       @user = User.find(params[:id])
     end
@@ -74,4 +87,6 @@ class UsersController < ApplicationController
         redirect_to current_user
       end
     end
+
+  
 end
