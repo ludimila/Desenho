@@ -95,13 +95,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def admin_only
-      if(!current_user.admin?)
-        flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
-        redirect_to current_user
-      end
-    end
-
     def get_address(zip_code, user)
       if(!zip_code.blank?)
         address = HTTParty.get("http://cep.correiocontrol.com.br/#{zip_code}.json")
