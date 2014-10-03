@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create]
+  before_action :signed_in_user, except: [:new, :create]
+  before_action :get_user, except: [:new, :create, :index]
+  before_action :admin_only, except: [:new, :create, :show]
+
   def new
     @user = User.new
   end
@@ -17,10 +20,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def index
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def activate
@@ -29,20 +32,16 @@ class UsersController < ApplicationController
     else
       flash[:error] = "O usuario '#{@user.name}' nao pode ser ativado."
     end
-    redirect_to current_user
+    redirect_to users_path
   end
 
   def deactivate
     if(@user.update_columns(activated: false, activated_at: nil))
-      if(current_user and current_user.admin?)
-        flash[:notice] = "O usuario '#{@user.name}' foi desativado com sucesso."
-      end
+      flash[:notice] = "O usuario '#{@user.name}' foi desativado com sucesso."
     else
-      if(current_user and current_user.admin?)
-        flash[:error] = "O usuario '#{@user.name}' nao pode ser desativado."
-      end
+      flash[:error] = "O usuario '#{@user.name}' nao pode ser desativado."
     end
-    redirect_to current_user
+    redirect_to users_path
   end
 
   private
@@ -52,12 +51,5 @@ class UsersController < ApplicationController
 
     def get_user
       @user = User.find(params[:id])
-    end
-
-    def admin_only
-      if(!current_user.admin?)
-        flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
-        redirect_to current_user
-      end
     end
 end
