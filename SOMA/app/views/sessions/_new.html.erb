@@ -1,5 +1,3 @@
-<!DOCTYPE HTML>
-<html>
   <%= form_for(:session, url: sessions_path) do |f| %>
   
     <%= f.text_field :login, placeholder: "Email ou Login", class: "input-group form-control input-lg" %>
@@ -7,8 +5,3 @@
     
     <%= f.submit "Entrar", class:"btn btn-primary btn-lg btn-block" %>
   <% end %>
-
-</html>
-
-
-  
