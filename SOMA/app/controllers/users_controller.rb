@@ -60,9 +60,13 @@ class UsersController < ApplicationController
   end
 
   def update_login
-    @user.update(user_login)
-    flash[:success] = "Login Alterado com sucesso!"
-    redirect_to @user
+    if(@user.update(user_login))
+      flash[:success] = "Login/senha alterados com sucesso!"
+      redirect_to @user
+    else
+      flash.now[:error] = "Login/senha não puderam ser alterados. Contate o administrador do sistema."
+      render "edit_login"
+    end
   end
 
   def edit_login
@@ -75,7 +79,7 @@ class UsersController < ApplicationController
     end
 
     def user_login
-      params.require(:user).permit(:login,:password,:password_confirmation)
+      params.require(:user).permit(:login, :password, :password_confirmation)
     end
     def get_user
       @user = User.find(params[:id])
