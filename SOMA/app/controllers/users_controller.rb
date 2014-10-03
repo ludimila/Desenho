@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create]
+  require "httparty"
+  before_action :get_user, :signed_in_user, :admin_only, except: [:new, :create, :index]
+
   def new
     @user = User.new
   end
@@ -7,6 +9,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.password = "provisoria"
+
+    if(!params[:user][:zip_code].blank?)
+      @user = get_address(params[:user][:zip_code], @user)
+    end
+
     if(@user.login.blank?)
       @user.login = @user.email
     end
@@ -75,7 +82,7 @@ class UsersController < ApplicationController
     
   private
     def user_params
-      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :number, :state) 
+      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :street, :number, :district, :city, :state)
     end
 
     def edit_params
@@ -96,5 +103,16 @@ class UsersController < ApplicationController
       end
     end
 
-  
+    def get_address(zip_code, user)
+      if(!zip_code.blank?)
+        address = HTTParty.get("http://cep.correiocontrol.com.br/#{zip_code}.json")
+        if(!address.blank?)
+          user.street = address["logradouro"]
+          user.district = address["bairro"]
+          user.city = address["localidade"]
+          user.state = address["uf"]
+        end
+      end
+      user
+    end
 end
