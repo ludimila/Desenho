@@ -8,7 +8,10 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(login: params[:session][:login].downcase)
     if(user and user.authenticate(params[:session][:password]))
-      if(user.activated?)
+      if(user.activated_at and Date.current == user.activated_at.next_month)
+        user.update_columns(activated: false, activated_at: nil)
+        redirect_to root_path, notice: "Sua conta foi desativada. Entre em contato com o administrador do sistema."
+      elsif(user.activated?)
         sign_in(user)
         redirect_back_or(user)
       else

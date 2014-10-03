@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_only
+    if(!current_user.admin?)
+      flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
+      redirect_to current_user
+    end
+  end
+
 end

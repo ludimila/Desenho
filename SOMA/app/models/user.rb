@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
   validates :email, format: {with: EMAIL_REGEX }, uniqueness: true, presence: true
 
-  ISSUE_AGENCY_REGEX = /\A[A-Z]+\z/
-  validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: ISSUE_AGENCY_REGEX, message: "Use somente letras MAIUSCULAS."} 
+  CAPITAL_LETTER_REGEX = /\A[A-Z]+\z/
+  validates :issuing_agency, length: {in: 5..20}, presence: true, format: {with: CAPITAL_LETTER_REGEX, message: "Use somente letras MAIUSCULAS."} 
   
   validates :name, presence: true, length: {minimum: 10}
 
@@ -14,14 +14,17 @@ class User < ActiveRecord::Base
   #validates :password, length: {minimum: 5}
   
   validates :phone1, length: {in: 10..11}, presence: true, numericality: {only_integer: true}
-  validates :phone2, length: {in: 10..11}, numericality: {only_integer: true}
+  validates :phone2, length: {in: 10..11}, numericality: {only_integer: true}, allow_blank: true
  
   validates :rg, length: {in: 3..11}, presence: true, uniqueness: true, numericality: {only_integer: true}
   
   validates :zip_code, presence: true, length: {is: 8}, numericality: {only_integer: true}
 
   validates :login, uniqueness: true
-  
+
+  validates :number, length: {maximum: 6}, numericality: {only_integer: true}
+  validates :state, length: {in: 2..3}, format: {with: CAPITAL_LETTER_REGEX, message: "Use Duas Letras Maiusculas"}
+
   def check_cpf
     if(!validate_cpf(self.cpf))
       errors.add(:cpf, "invalido")
@@ -78,19 +81,5 @@ class User < ActiveRecord::Base
       end
       params[:values].unshift(11)
       params
-    end
-
-    def self.create_admin
-      admin = User.find_by(login: "admin")
-      if(admin.nil?)
-        admin = User.new(
-        login: "admin",
-        password: "admin",
-        password_confirmation: "admin",
-        admin: true,
-        activated: true)
-        admin.save(validate: false)
-      end
-      admin
     end
 end

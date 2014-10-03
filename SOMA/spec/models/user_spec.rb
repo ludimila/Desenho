@@ -11,6 +11,11 @@ describe User do
     @user = nil
   end
 
+      it "should not save if state has more than 3 characters" do
+        @user.state = "ABCD"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:state]).not_to be_nil
+      end
   context "when providing valid data" do
     it "should generate a User model" do
       expect(@user).to be_an_instance_of(User)
@@ -189,6 +194,36 @@ describe User do
         @user.zip_code = "12345678910"
         expect(@user.save).to be_false
         expect(@user.errors.messages[:zip_code]).not_to be_nil
+      end
+
+      it "should not save if number is not a number" do
+        @user.number = "num"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:number]).not_to be_nil
+      end
+
+      it "should not save if number has more than 6 characters" do
+        @user.number = "1234567"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:number]).not_to be_nil
+      end
+
+      it "should not save if state has more than 3 characters" do
+        @user.state = "ABCD"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:state]).not_to be_nil
+      end
+
+      it "should not save if state has numbers" do
+        @user.state = "AB1"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:state]).not_to be_nil
+      end
+
+      it "should not save if state has less than 2 characters" do
+        @user.state = "A"
+        expect(@user.save).to be_false
+        expect(@user.errors.messages[:state]).not_to be_nil
       end
     end
   end

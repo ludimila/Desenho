@@ -1,14 +1,9 @@
-<!DOCTYPE HTML>
-<html>
   <%= form_for(:session, url: sessions_path) do |f| %>
+  
+    <%= f.text_field :login, placeholder: "Email ou Login", class: "input-group form-control input-lg" %>
+    <%= f.password_field :password, placeholder:"Senha", class: "input-group form-control input-lg" %>
     
-    <input type="text" class="form-control input-lg" placeholder="Email", class: "input-group" >
-    <input type="password" class="form-control input-lg" placeholder="Senha", class: "input-goup">
-    <button class="btn btn-primary btn-lg btn-block">Entrar</button>
-
+    <%= f.submit "Entrar", class:"btn btn-primary btn-lg btn-block" %>
   <% end %>
 
-</html>
 
-
-  
