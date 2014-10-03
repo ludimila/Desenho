@@ -7,7 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.password = "provisoria"
-    @user.login = @user.name.parameterize
+    if(@user.login.blank?)
+      @user.login = @user.email
+    end
     if(@user.save)
       flash[:success] = "Sua conta será ativada assim que recebermos a confirmação do seu pagamento."
       redirect_to root_path
@@ -45,11 +47,44 @@ class UsersController < ApplicationController
     redirect_to current_user
   end
 
+  def edit
+  end
+
+  def update
+    if(@user.update(edit_params))
+      flash[:success] = "Atualização feita com sucesso."
+      redirect_to @user
+    else
+      render "edit"
+    end
+  end
+
+  def update_login
+    if(@user.update(user_login))
+      flash[:success] = "Login/senha alterados com sucesso!"
+      redirect_to @user
+    else
+      flash.now[:error] = "Login/senha não puderam ser alterados. Contate o administrador do sistema."
+      render "edit_login"
+    end
+  end
+
+  def edit_login
+
+  end  
+    
   private
     def user_params
-      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email) 
+      params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :number, :state) 
     end
 
+    def edit_params
+      params.require(:user).permit(:name, :phone1, :phone2, :zip_code, :email, :number, :state) 
+    end
+
+    def user_login
+      params.require(:user).permit(:login, :password, :password_confirmation)
+    end
     def get_user
       @user = User.find(params[:id])
     end
@@ -60,4 +95,6 @@ class UsersController < ApplicationController
         redirect_to current_user
       end
     end
+
+  
 end

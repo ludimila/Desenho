@@ -4,8 +4,8 @@ Desenho
 Trabalho da disciplina de desenho de software2014.2 UnB/FGA
 
 Utilize uma RVM, com as seguintes configurações (use o tutorial no final do arquivo que a Ludimila passou)
-  ruby 1.9.3p547 (2014-05-14 revision 45962)
-  Rails 3.2.19
+  ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
+  Rails 4.1.5
 
 Configuração do Banco de Dados, utilizando Linux (Ubuntu 14.04)
 Instale os pacotes client e server do mysql
