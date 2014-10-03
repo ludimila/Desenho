@@ -10,15 +10,18 @@
 
   <%= render "layouts/header" %>
 
-  <div class="container">
+  <div class="container fluid-container">
     <% flash.each do |key, value| %>
       <div class="alert <%= bootstrap_class_for(key) %>" role="alert"><%= value %></div>
     <% end %>
 
+
     <%= yield %>
 
-    <%= debug(params) if Rails.env.development? %>
   </div>
 
+  <div class="container">
+    <%= debug(params) if Rails.env.development? %>
+  </div>
 </body>
 </html>
