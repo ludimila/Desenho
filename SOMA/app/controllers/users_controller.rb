@@ -87,8 +87,14 @@ class UsersController < ApplicationController
 
   def edit_login
 
-  end  
-    
+  end
+
+  def destroy
+    @user.destroy
+    flash[:success] = "Usuário excluído com sucesso."
+    redirect_to users_url
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :rg, :issuing_agency, :cpf, :phone1, :phone2, :zip_code, :email, :street, :number, :district, :city, :state)
