@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   require "httparty"
+  require "will_paginate/array"
 
   before_action :signed_in_user, except: [:new, :create]
   before_action :get_user, except: [:new, :create, :index]
@@ -32,7 +33,16 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 10)
+    users_ids = find_regex(params[:search])
+    if(users_ids.blank?)
+      @users = User.all
+      if(!params[:search].blank?)
+        flash.now[:notice] = "Não foi encontrado nenhum usuário com o nome #{params[:search]}. Exibindo todos os usuários."
+      end
+    else
+      @users = User.find(users_ids)
+    end
+    @users = @users.paginate(:page => params[:page])
   end
 
   def activate
@@ -91,8 +101,29 @@ class UsersController < ApplicationController
     def user_login
       params.require(:user).permit(:login, :password, :password_confirmation)
     end
+
     def get_user
       @user = User.find(params[:id])
+    end
+
+    def admin_only
+      if(!current_user.admin?)
+        flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
+        redirect_to current_user
+      end
+    end
+
+    def find_regex(regex)
+      ids = []
+      if(!regex.blank?)
+        regex = /#{regex}/i
+        User.all.each do |user|
+          if(user.name =~ regex)
+            ids << user.id
+          end
+        end
+      end
+      ids
     end
 
     def get_address(zip_code, user)
