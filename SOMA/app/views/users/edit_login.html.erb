@@ -7,19 +7,19 @@
         <%= render partial: "shared/errors", locals: { object: @user } %>
 
         <%= f.label :login, "Alterar Login ", class: "required" %>
-        <%= f.text_field :login %>
+        <%= f.text_field :login , class: "input-group form-control input-lg"%>
 
         <%= f.label :current_password, "Senha atual", class: "required" %>
-        <%= f.password_field :current_password %>
+        <%= f.password_field :current_password, class: "input-group form-control input-lg" %>
 
         <%= f.label :password, "Nova Senha ", class: "required" %>
-        <%= f.password_field :password %>
+        <%= f.password_field :password, class: "input-group form-control input-lg" %>
 
         <%= f.label :password_confirmation, "Confirmar Nova Senha ", class: "required" %>
-        <%= f.password_field :password_confirmation %>
-
-        <%= f.submit "Confirmar", class: "btn btn-default btn-medium bnt-primary" %>
-        <%= link_to "Cancelar", @user, class: "btn bnt-primary" %>
+        <%= f.password_field :password_confirmation, class: "input-group form-control input-lg" %>
+        <br>
+        <%= f.submit "Confirmar", class: "btn btn-primary btn-lg btn-block" %>
+        <%= link_to "Cancelar", @user, class: "btn btn-primary btn-lg btn-block" %>
 
       <% end %>
   </div>
