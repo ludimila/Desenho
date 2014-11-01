@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
   root "static_pages#home"
-  resources :users
+  resources :users, except: [:index]
+  resources :students, except: [:index]
+  resources :doctors, except: [:index]
   resources :sessions, only: [:new, :create, :destroy] 
 
+  match "/users", to: "doctors#index", via: "get", as: "all_users"
   match "/signup", to: "sessions#new", via: "get" 
   match "/signin", to: "sessions#new", via: "get" 
   match "/signout", to: "sessions#destroy", via: "delete", as: "signout"
   match "/deacivate/:id", to: "users#deactivate", via: "get", as: "deactivate"
   match "/activate/:id", to: "users#activate", via: "get", as: "activate"
-  match "/users/:id/edit/login", to: "users#edit_login", via: "get", as: "edit_login"
-  match "/users/:id/edit/login", to: "users#update_login", via: "patch", as: "update_login"
+  match "/:controller/:id/edit/login", to: "students#edit_login", via: "get", as: "edit_login"
+  match "/:controller/:id/edit/login", to: "students#update_login", via: "patch", as: "update_login"
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

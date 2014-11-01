@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
 
   describe "GET 'new'" do
     xit "returns http success" do
@@ -16,4 +16,10 @@ describe UsersController do
     end
   end
 
+  describe "GET 'index'" do
+    it "returns http success" do
+      get 'index'
+      expect(response).not_to be_success
+    end
+  end
 end
