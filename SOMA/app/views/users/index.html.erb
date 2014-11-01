@@ -3,25 +3,18 @@
       <h1> Painel de Controle </h1>
       <h3>Ative ou desative um usuário.</h3>
       <div class="input-group col-lg-11">
-        <%= form_tag(users_path, method: "get") do %>
+        <%= form_tag(all_users_path, method: "get") do %>
           <%= text_field_tag "search", "", {class: "form-control", placeholder: "Digite uma parte do nome desejado"} %>
           <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            <button class="btn btn-default" type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
           </span>
           <% end %>
         </div><!-- /input-group -->
        <br />
 
-       <table class="table table-bordered table-striped">
-         <tr>
-           <th><%= "Status" %></th>
-           <th><%= "Nome" %></th>
-           <th><%= "Mudar Status" %></th>
-           <th></th>
-         </tr>
-
-         <%= render @users %>
-       </table>
+       <%= render "users/index" %>
 
        <%= "Legenda: " %>
        <table>
