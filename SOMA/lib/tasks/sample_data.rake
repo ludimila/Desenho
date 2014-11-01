@@ -1,9 +1,9 @@
 namespace :db do
   desc "Fill database with sample users"
   task populate: :environment do
-    admin = User.find_by(login: "admin")
+    admin = Doctor.find_by(login: "admin")
     if(admin.nil?)
-      admin = User.new(name: "Administrador", login: "admin", password: "admin",
+      admin = Doctor.new(name: "Administrador", login: "admin", password: "admin",
                  password_confirmation: "admin", admin: true, activated: true, activated_at: Date.current.last_year)
       admin.save(validate: false)
     end
@@ -14,7 +14,7 @@ namespace :db do
       user_params = {email: email, login: email, name: name, password: "senha",
                     password_confirmation: "senha", rg: "000000#{n}", cpf: "0000000000#{n}",
                     issuing_agency: "SSPDF", zip_code: "00000000", phone1: "0000000000", phone2: nil}
-      user = User.create(user_params)
+      user = Student.create(user_params)
       user.save(validate: false)
     end
   end
