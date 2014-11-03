@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :doctor_only, except: [:show]
+
   def new
     @course = Course.new
   end
@@ -14,6 +16,12 @@ class CoursesController < ApplicationController
   end
 
   def show
+    begin
+      @course = Course.find(params[:id])
+    rescue Exception => e
+      flash[:error] = "Curso Não encontrado!!!"
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -29,4 +37,10 @@ class CoursesController < ApplicationController
       params.require(:course).permit(:doctor_id, :name, :workload)
     end
 
+    def doctor_only
+      if(!current_user.is_a?(Doctor))
+        flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
+        redirect_to current_user
+      end
+    end
 end
