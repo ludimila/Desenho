@@ -17,6 +17,9 @@ class CoursesController < ApplicationController
   end
 
   def destroy
+    Course.find(params[:id]).destroy
+    flash[:success] = "Curso excluído com sucesso."
+    redirect_to current_user
   end
 
   private

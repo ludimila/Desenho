@@ -1,0 +1,27 @@
+<table class="table table-bordered table-striped">
+  <tr class=>
+    <th><%= "Curso" %></th>
+    <th><%= "Carga Horária" %></th>
+    <th><%= "Alunos" %></th>
+    <th></th>
+  </tr>
+
+  <% @user.courses.each do |course| %>
+    <tr >
+      <td class="col-md-11">
+        <%= link_to course.name, course %>
+      </td>
+
+      <td>
+        <%= course.workload.to_s %>
+      </td>
+
+      <td>
+      </td>
+
+      <td>
+        <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-trash"), course, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente este curso? \nEssa ação não poderá ser desfeita." } %>
+      </td>
+    <% end %>
+    </tr>
+</table>
