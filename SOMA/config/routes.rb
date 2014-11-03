@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, except: [:index]
   resources :students, except: [:index]
   resources :doctors, except: [:index]
+  resources :courses
   resources :sessions, only: [:new, :create, :destroy] 
 
   match "/users", to: "doctors#index", via: "get", as: "all_users"

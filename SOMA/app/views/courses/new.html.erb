@@ -1,0 +1,21 @@
+<div class="row">
+  <%= form_for(@course) do |f| %>
+
+    <%= render "errors" %>
+
+    <%= f.label(:name,"Nome do Curso") %>
+    <%= f.text_field(:name, placeholder:"Ex.: Faturamento Médico")%>
+
+    <%= f.label(:workload, "Carga Horaria") %>
+    <%= f.text_field(:workload, placeholder:"Ex.: 10")%>
+    <%= f.label(:workload, "Horas/Aula") %>
+
+    <%= f.label(:doctor, "Doutor") %>
+    <%= f.text_field(:doctor, value: current_user.name, disabled: true, maxlength: 11)%>
+
+    <%= f.submit("Finalizar", class: "btn btn-primary") %>
+    <%= link_to("Cancelar", root_path, class: "btn btn-primary")%>
+
+  <% end %>
+</div>
+
