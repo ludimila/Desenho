@@ -35,5 +35,17 @@ class StudentsController < UsersController
       params.require(:student).permit(:login, :password, :password_confirmation)
     end
 
+    def get_user
+      begin
+        @user = Student.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        flash[:error] = "Usuário Não Encontrado!!"
+        redirect_to root_path
+      rescue Exception => e
+        flash[:error] = "#{e.message}. Contate o administrador do sistema."
+        redirect_to root_path
+      end
+    end
+
 
 end

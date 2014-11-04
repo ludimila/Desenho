@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :doctor_only, except: [:show]
+  before_action :get_course, only: [:show, :destoy]
 
   def new
     @course = Course.new
@@ -16,18 +17,12 @@ class CoursesController < ApplicationController
   end
 
   def show
-    begin
-      @course = Course.find(params[:id])
-    rescue Exception => e
-      flash[:error] = "Curso Não encontrado!!!"
-      redirect_to root_path
-    end
   end
 
   def destroy
-    Course.find(params[:id]).destroy
+    @course.destroy
     flash[:success] = "Curso excluído com sucesso."
-    redirect_to current_user
+    redirect_to current_user  
   end
 
   private
@@ -41,6 +36,18 @@ class CoursesController < ApplicationController
       if(!current_user.is_a?(Doctor))
         flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
         redirect_to current_user
+      end
+    end
+
+    def get_course
+      begin
+        @course = Course.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        flash[:error] = "Curso Não Encontrado!!"
+        redirect_to root_path
+      rescue Exception => e
+        flash[:error] = "#{e.message}. Contate o administrador do sistema."
+        redirect_to root_path
       end
     end
 end

@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     end
 
     def get_user
-      @user = User.find(params[:id])
+      @user = User.find(params[:id])          
     end
 
     def find_regex(regex)
