@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106174044) do
+ActiveRecord::Schema.define(version: 20141106232726) do
 
   create_table "courses", force: true do |t|
     t.integer  "doctor_id"
     t.string   "name"
-    t.float    "workload",   limit: 24
+    t.float    "workload",     limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "last_updates"
   end
 
   add_index "courses", ["doctor_id"], name: "index_courses_on_doctor_id", using: :btree
