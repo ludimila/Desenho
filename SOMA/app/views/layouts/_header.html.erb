@@ -1,7 +1,9 @@
 <header class="navbar navbar-inverse" role="navigation">
   <div class="container container-fluid">
     <div class="navbar-header">
-      <%= link_to "SOMA", root_path, class: "navbar-brand" %>
+      <ul class="nav navbar-nav">
+        <li><%= link_to "SOMA", root_path, class: "navbar-brand" %></li>
+        <%= render "courses/header" %>
     </div>
 
     <% if(signed_in?) %>
