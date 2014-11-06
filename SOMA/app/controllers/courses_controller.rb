@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    @course.name = @course.name.titleize
     if(@course.save)
       flash[:success] = "Novo curso criado com sucesso!"
       redirect_to @course
