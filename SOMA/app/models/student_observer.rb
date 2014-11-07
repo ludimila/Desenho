@@ -1,0 +1,1 @@
+/home/parley/Repositories/Desenho/SOMA/app/models/observer/student_observer.rb

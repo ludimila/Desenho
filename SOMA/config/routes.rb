@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   match "/activate/:id", to: "users#activate", via: "get", as: "activate"
   match "/:controller/:id/edit/login", to: "students#edit_login", via: "get", as: "edit_login"
   match "/:controller/:id/edit/login", to: "students#update_login", via: "patch", as: "update_login"
+  match "/course/:id/join", to: "courses#join", via: "post", as: "join"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

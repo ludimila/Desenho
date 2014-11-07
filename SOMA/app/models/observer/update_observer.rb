@@ -1,10 +1,10 @@
-class UpdateObserver
-  def notify_creation(course, attribute)
+class UpdateObserver < ActiveRecord::Base
+  def self.notify_creation(course, attribute)
   end
   
-  def notify_edition(course, attribute)
+  def self.notify_edition(course, attribute)
   end
   
-  def notify_destuction(course, attribute)
+  def self.notify_destuction(course, attribute)
   end
 end

@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :doctor_only, except: [:show]
+  before_action :doctor_only, except: [:show, :index, :join]
   before_action :get_course, only: [:show, :destoy]
 
   def new
@@ -20,10 +20,24 @@ class CoursesController < ApplicationController
   def show
   end
 
+  def index
+    @courses = Course.all
+  end
+
   def destroy
     @course.destroy
     flash[:success] = "Curso excluído com sucesso."
     redirect_to current_user  
+  end
+
+  def join
+    if(current_user.is_a?(Student))
+      course = Course.find(params[:id])
+      StudentObserver.notify_creation(course, current_user)
+      course.students << current_user
+      flash[:success] = "Aluno matriculado com sucesso!"
+    end
+    redirect_to current_user
   end
 
   private
