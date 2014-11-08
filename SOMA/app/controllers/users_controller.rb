@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   require "httparty"
   require "will_paginate/array"
 
-  before_action :admin_only, only: [:index, :activate, :deactivate, :destroy]
   before_action :signed_in_user, except: [:new, :create]
+  before_action :admin_only, only: [:index, :activate, :deactivate, :destroy]
   before_action :get_user, except: [:new, :create, :index]
 
   def show
