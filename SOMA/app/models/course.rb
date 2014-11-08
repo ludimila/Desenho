@@ -3,7 +3,7 @@ class Course < ActiveRecord::Base
 
   belongs_to :doctor, inverse_of: :courses
 
-  has_and_belongs_to_many :students
+  has_and_belongs_to_many :students, -> { uniq }
 
   has_many :documents, dependent: :destroy, inverse_of: :course, autosave: true
   has_many :videos, dependent: :destroy, inverse_of: :course, autosave: true

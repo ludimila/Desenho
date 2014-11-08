@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def doctor?
+    false
+  end
+
+  def student?
+    false
+  end
+
   private
     def validate_cpf(cpf = nil)
       valid = false

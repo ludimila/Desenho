@@ -4,7 +4,7 @@ class StudentObserver < UpdateObserver
     course.save
   end
 
-  def self.notify_destuction(course, attribute)
+  def self.notify_destruction(course, attribute)
     course << "Aluno: #{attribute.name} removido em #{Date.current}"
     course.save
   end
