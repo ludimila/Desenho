@@ -1,2 +1,5 @@
-<%= render "courses/show" %>
-<%= render "courses/tabs/last_updates" %>
+<% if(current_user.student?) %>
+  <%= render "courses/students/show" %>
+<% else %>
+  <%= render "courses/doctors/show" %>
+<% end %>
