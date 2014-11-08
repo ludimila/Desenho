@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+#ruby 2.1.2@soma
 ruby "2.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
@@ -12,8 +13,10 @@ gem "bootstrap-will_paginate", "0.0.9"
 gem "paperclip", "4.2.0"
 gem "mysql", "~> 2.9.1"
 gem "httparty"
+gem "byebug"
+gem 'font-awesome-sass'
+gem "font-awesome-rails"
 
-# Use sqlite3 as the database for Active Record
 group :test do
   gem 'rspec'
   gem "rspec-rails"
