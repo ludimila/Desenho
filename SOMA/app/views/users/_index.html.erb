@@ -11,10 +11,10 @@
     <tr>
       <td>
         <% if(user.activated?) %>
-          <span class="glyphicon glyphicon-ok-sign"></span>
+          <span class="fa fa-check-circle-o"></span>
           <%= user.activated_at.to_formatted_s(:rfc822) %>
         <% else %>
-          <span class="glyphicon glyphicon-minus-sign"></span>
+          <span class="fa fa-minus-circle"></span>
         <% end %>
       </td>
 
@@ -36,7 +36,7 @@
         </td>
 
         <td>
-          <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-trash"), user, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente esse usuário? \nEssa ação não poderá ser desfeita." } %>
+          <%= link_to content_tag(:span, "", class: "fa fa-trash"), user, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente esse usuário? \nEssa ação não poderá ser desfeita." } %>
         </td>
       <% end %>
     </tr>

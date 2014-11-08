@@ -7,7 +7,7 @@
 
   <% courses.each do |course| %>
     <tr >
-      <td class="col-md-10">
+      <td class="col-md-8">
         <%= link_to course.name, course %>
       </td>
 
@@ -17,9 +17,15 @@
 
       <td>
         <% if(!course.students.exists?(current_user)) %>
-          <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"), join_path(course), method: :post %>
+          <%= link_to join_path(course), method: :post do%>
+            <%= content_tag(:span, "", class: "fa fa-sign-in") %>
+            <%= "Me matricular nesse curso" %>
+          <% end %>
         <% else %>
-          <%= link_to content_tag(:i, "", class: "fa fa-sign-out"), disjoin_path(course), method: :post %>
+          <%= link_to disjoin_path(course), method: :post, data:{ confirm: "Tem certeza que deseja sair desse curso? \n Você poderá voltar a qualquer momento." } do%>
+            <%= content_tag(:span, "", class: "fa fa-sign-out") %>
+            <%= "Sair desse curso" %>
+          <% end %>
         <% end %>
       </td>
 
