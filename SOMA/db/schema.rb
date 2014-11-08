@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141106232726) do
     t.float    "workload",     limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "last_updates"
+    t.text     "last_updates"
   end
 
   add_index "courses", ["doctor_id"], name: "index_courses_on_doctor_id", using: :btree

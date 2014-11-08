@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :doctor_only, except: [:show, :index, :join]
-  before_action :get_course, only: [:show, :destoy]
+  before_action :doctor_only, except: [:show, :index, :join, :disjoin]
+  before_action :get_course, only: [:show, :destoy, :join, :disjoin]
 
   def new
     @course = Course.new
@@ -31,11 +31,23 @@ class CoursesController < ApplicationController
   end
 
   def join
-    if(current_user.is_a?(Student))
-      course = Course.find(params[:id])
-      StudentObserver.notify_creation(course, current_user)
-      course.students << current_user
+    if(current_user.student? and !@course.students.exists?(current_user))
+      StudentObserver.notify_creation(@course, current_user)
+      @course.students << current_user
       flash[:success] = "Aluno matriculado com sucesso!"
+    else
+      flash[:alert] = "Você já está matriculado no curso desejado!"
+    end
+    redirect_to current_user
+  end
+
+  def disjoin
+    if(current_user.student? and @course.students.exists?(current_user))
+      StudentObserver.notify_destruction(@course, current_user)
+      @course.students.delete(current_user)
+      flash[:success] = "Aluno removido com sucesso!"
+    else
+      flash[:error] = "Aluno não matriculado. Para sair, você deve ter se matriculado no curso, primeiramente!"
     end
     redirect_to current_user
   end
