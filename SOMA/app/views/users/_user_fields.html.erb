@@ -2,7 +2,7 @@
     <div class="center-block">
     <%= form_for(@user) do |f| %>
 
-      <%= render "errors" %>
+      <%= render partial: "shared/errors", locals: { object: @user } %>
 
       <%= content_tag :div, f.label(:name,"Nome Completo", class: "col-md-2 required") %>
       <%= content_tag :div, f.text_field(:name, placeholder:"Ex.: Fulano de Tal", class: "form-control input-lg"), class: "col-md-9 " %>

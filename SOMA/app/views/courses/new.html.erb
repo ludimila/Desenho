@@ -1,7 +1,7 @@
 <div class="row">
   <%= form_for(@course) do |f| %>
 
-    <%= render "errors" %>
+    <%= render partial: "shared/errors", locals: { object: @course } %>
 
     <%= f.label(:name,"Nome do Curso") %>
     <%= f.text_field(:name, placeholder:"Ex.: Faturamento Médico")%>

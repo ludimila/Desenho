@@ -1,0 +1,15 @@
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <%= "Este formulário contém " %> <%= pluralize(object.errors.count, "erro") %>
+    </div>
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li> 
+          <%= content_tag(:span, "", class: "fa fa-times") %>
+          <%= msg %> 
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
