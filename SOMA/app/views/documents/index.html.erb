@@ -1,0 +1,12 @@
+
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:documents] } %>
+
+<%= link_to_if(current_user.doctor?, new_document_path, class: "btn btn-default") do %>
+      <%= content_tag(:span, "", class: "fa fa-plus") %>
+      <%= "Adicionar novo Documento" %>
+    <% end %>
+  <br>
+  
+  <%= "Documentos Disponíveis" %>
+
+    

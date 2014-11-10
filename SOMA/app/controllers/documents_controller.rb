@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+  before_action :get_menu
+
   def new
     @document = Document.new
   end
@@ -11,4 +13,9 @@ class DocumentsController < ApplicationController
 
   def show
   end
+
+  private
+    def get_menu
+      @MENU_OPTIONS = {documents: 2}
+    end
 end

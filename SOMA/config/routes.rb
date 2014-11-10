@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :doctors, except: [:index]
   resources :courses
   resources :sessions, only: [:new, :create, :destroy] 
+  resources :documents
 
   match "/users", to: "doctors#index", via: "get", as: "all_users"
   match "/signup", to: "sessions#new", via: "get" 
