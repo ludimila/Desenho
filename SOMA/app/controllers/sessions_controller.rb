@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :no_course
   def new
     if(signed_in?)
       redirect_to current_user

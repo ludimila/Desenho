@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, except: [:new, :create]
   before_action :admin_only, only: [:index, :activate, :deactivate, :destroy]
   before_action :get_user, except: [:new, :create, :index]
+  before_action :no_course
 
   def show
   end
@@ -68,7 +69,7 @@ class UsersController < ApplicationController
     end
 
     def get_user
-      @user = User.find(params[:id])          
+      @user = User.find(params[:id])
     end
 
     def find_regex(regex)

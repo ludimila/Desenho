@@ -18,6 +18,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    session[:course] = @course.id
   end
 
   def index
@@ -39,6 +40,9 @@ class CoursesController < ApplicationController
       flash[:alert] = "Você já está matriculado no curso desejado!"
     end
     redirect_to current_user
+  end
+
+  def enrolled_students
   end
 
   def disjoin

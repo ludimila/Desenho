@@ -4,18 +4,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  def signed_in_user
-    if(!signed_in?)
-      store_location
-      redirect_to signin_url, notice: "Por favor, entre primeiro"
+  private
+    def signed_in_user
+      if(!signed_in?)
+        store_location
+        redirect_to signin_url, notice: "Por favor, entre primeiro"
+      end
     end
-  end
 
-  def admin_only
-    if(!current_user.admin?)
-      flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
-      redirect_to current_user
+    def admin_only
+      if(!current_user.admin?)
+        flash[:error] = "Você não tem permissão para realizar esta operação. Contate o administrador do sistema."
+        redirect_to current_user
+      end
     end
-  end
 
+    def no_course
+      session[:course] = nil
+    end
 end
