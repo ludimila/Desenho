@@ -1,0 +1,65 @@
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:students] }%>
+
+  <div class="col-xs-6 col-sm-9">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th><%= "Nome" %></th>
+        <th><%= "Fez a prova?" %> </th>
+        <th><%= "Aprovado?" %> </th>
+      </tr>
+
+      <% current_course.students.each do |user| %>
+        <tr>
+          <td class="col-md-9">
+            <%= link_to user.name, user %>
+          </td>
+          
+          <td>
+            <%= content_tag(:span, "", class: "fa fa-check-square-o") %>
+            <%= content_tag(:span, "", class: "fa fa-minus-square-o") %>
+            <%= content_tag(:span, "", class: "fa fa-square-o") %>
+          </td>
+
+          <td>
+            <%= content_tag(:span, "", class: "fa fa-thumbs-o-up") %>
+            <%= content_tag(:span, "", class: "fa fa-thumbs-o-down") %>
+          </td>
+
+        </tr>
+      <% end %>
+    </table>
+
+
+       <%= "Legenda: " %>
+       <table>
+        <tr>
+          <td><%= content_tag(:span, "", class: "fa fa-check-square-o") %></td>
+          <td><%= "Prova Realizada" %></td>
+        </tr>
+
+        <tr>
+          <td><%= content_tag(:span, "", class: "fa fa-minus-square-o") %></td>
+          <td><%= "Prova Agendada" %></td>
+        </tr>
+
+        <tr>
+          <td><%= content_tag(:span, "", class: "fa fa-square-o") %></td>
+          <td><%= "Prova Não Realizada ou Agendada" %></td>
+        </tr>
+
+        <tr>
+          <td><%= content_tag(:span, "", class: "fa fa-thumbs-o-up") %></td>
+          <td><%= "Aluno aprovado!" %></td>
+        </tr>
+
+        <tr>
+          <td><%= content_tag(:span, "", class: "fa fa-thumbs-o-down") %></td>
+          <td><%= "Aluno Reprovado" %></td>
+        </tr>
+        
+
+      </table>
+
+  </div>
+</div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "static_pages#home"
+
   resources :users, except: [:index]
   resources :students, except: [:index]
   resources :doctors, except: [:index]
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   match "/:controller/:id/edit/login", to: "students#update_login", via: "patch", as: "update_login"
   match "/course/:id/join", to: "courses#join", via: "post", as: "join"
   match "/course/:id/disjoin", to: "courses#disjoin", via: "post", as: "disjoin"
+  match "/course/students", to: "courses#enrolled_students", via: "get", as: "enrolled_students"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

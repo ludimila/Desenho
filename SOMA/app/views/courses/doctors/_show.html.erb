@@ -1,7 +1,7 @@
-<ul class="nav nav-tabs" role="tablist">
-  <li role="presentation" class="active"><%= link_to "Ultimas Noticias", "#" %></li>
-  <li role="presentation"><%= link_to "Material Disponivel", "#" %></li>
-  <li role="presentation"><%= link_to "Banco de Questões", "#" %></li>
-  <li role="presentation"><%= link_to "Videos", "#" %></li>
-  <li role="presentation"><%= link_to "Alunos", "#" %></li>
-</ul>
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:last_updates] } %>
+
+  <div class="col-xs-6 col-sm-9">
+    <%= render "courses/doctors/tabs/last_updates" %>
+  </div>
+</div>

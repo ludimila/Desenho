@@ -13,4 +13,10 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def current_course
+    if(session[:course])
+      Course.find(session[:course])
+    end
+  end
 end

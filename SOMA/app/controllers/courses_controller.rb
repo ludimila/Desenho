@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   before_action :doctor_only, except: [:show, :index, :join, :disjoin]
   before_action :get_course, only: [:show, :destoy, :join, :disjoin]
+  before_action :get_options
+
 
   def new
     @course = Course.new
@@ -80,5 +82,9 @@ class CoursesController < ApplicationController
         flash[:error] = "#{e.message}. Contate o administrador do sistema."
         redirect_to root_path
       end
+    end
+
+    def get_options
+      @MENU_OPTIONS = { last_updates: 1, documents: 2, videos: 3, questions: 4, students: 5 }
     end
 end
