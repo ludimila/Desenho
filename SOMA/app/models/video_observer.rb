@@ -1,1 +1,1 @@
-/home/parley/Repositories/Desenho/SOMA/app/models/observer/video_observer.rb
+observer/video_observer.rb

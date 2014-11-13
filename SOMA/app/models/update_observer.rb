@@ -1,1 +1,1 @@
-/home/parley/Repositories/Desenho/SOMA/app/models/observer/update_observer.rb
+observer/update_observer.rb
