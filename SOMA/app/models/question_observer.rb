@@ -1,1 +1,1 @@
-/home/parley/Repositories/Desenho/SOMA/app/models/observer/question_observer.rb
+observer/question_observer.rb
