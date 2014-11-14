@@ -24,6 +24,8 @@ group :test do
   gem "capybara"
   gem "factory_girl_rails"
   gem "minitest"
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 # Use SCSS for stylesheets
