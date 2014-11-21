@@ -1,1 +1,14 @@
-<h1> NOVO DOCUMENTO </h1>
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:documents] } %>
+
+<%= form_for(@document , :html => { :multipart => true }) do |f| %>
+
+  <%= render partial: "shared/errors", locals: { object: @document } %>
+
+  <%= f.file_field :document %>
+
+  <%= f.label :description, "Descrição" %>
+  <%= f.text_field :description %>
+
+  <%= f.submit("Finalizar", class: "btn btn-primary") %>
+<% end %>
+
