@@ -3,7 +3,7 @@
     <div class="alert alert-error">
       <%= "Este formulário contém " %> <%= pluralize(object.errors.count, "erro") %>
     </div>
-    <ul>
+    <ul class="fa-ul">
       <% object.errors.full_messages.each do |msg| %>
         <li> 
           <%= content_tag(:span, "", class: "fa fa-times") %>
