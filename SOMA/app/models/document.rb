@@ -4,8 +4,6 @@ class Document < ActiveRecord::Base
 
   SECRET_NAME = Array.new(5){[*"A".."Z", *"0".."9"].sample}.join
   has_attached_file :document ,{
-    url: "/system/:hash.:extension",
-    hash_secret: SECRET_NAME,
     styles: {
       pdf_thumbnail: ["100x100#", "jpg"],
       :small  => ["150x150>", "jpg"],
@@ -16,6 +14,11 @@ class Document < ActiveRecord::Base
     :content_type => { :content_type => "application/pdf" },
     :size => { :in => 0..5.megabytes }
   validates_attachment_file_name :document, :matches => [/pdf\Z/]
+
+  def get_readable_name
+    name = self.document_file_name.split('.').first
+    name.titleize
+  end
 
   private
     def destroy_documents
