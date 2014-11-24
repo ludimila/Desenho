@@ -29,6 +29,17 @@ class DocumentsController < ApplicationController
   def show
   end
 
+  def destroy
+    @document = Document.find(params[:id])
+    if(@document.destroy)
+      DocumentObserver.notify_destruction(current_course, @document)
+      flash[:success] = "Documento excluído com sucesso!"
+    else
+      flash[:error] = "Documento não pôde ser excluído. Contate o administrador do sistema."
+    end
+    redirect_to documents_path
+  end
+
   private
     def get_menu
       @MENU_OPTIONS = {documents: 2}
