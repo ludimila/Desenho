@@ -1,27 +1,18 @@
 <div class="row">
-  <div class="col-xs-6 col-sm-3">
-    <ul class="nav nav-pills nav-stacked" role="tablist">
-      <li role="presentation" class="active">
-        <%= link_to "#" do %>
-          <%= content_tag(:span, "", class: "fa fa-book fa-fw") %>
-          <%= "Material de apoio" %>
-        <% end %>
-      </li>
-      <li role="presentation">
-        <%= link_to "#" do %>
-          <%= content_tag(:span, "", class: "fa fa-youtube-play fa-fw") %>
-          <%= "Vídeos" %>
-        <% end %>
-     </li>
-       <li role="presentation">
-        <%= link_to "#" do %>
-          <%= content_tag(:span, "", class: "fa fa-university fa-fw") %>
-          <%= "Fazer Prova" %>
-        <% end %>
-     </li>
-   </ul>
-  </div>
+  <%= render partial: "courses/students/menu", locals: { menu: @MENU_OPTIONS[:documents] } %>
 
   <div class="col-xs-6 col-sm-9">
-  </div>
 
+  <div>
+    <ul class="fa-ul list-group">
+      <% current_course.documents.all.each do |doc| %>
+        <li class="list-group-item">
+          <%= image_tag doc.document.url(:small) %>
+          <%= link_to doc.get_readable_name, doc.document.url, target: "_blank" %>
+          <%= doc.description %>
+        </li>
+        <br>
+      <% end %>
+    </ul>
+  </div>
+</div>
