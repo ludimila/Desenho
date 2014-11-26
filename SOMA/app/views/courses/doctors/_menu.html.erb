@@ -23,7 +23,7 @@
     </li>
 
     <li role="presentation" class="<%= "active" if(menu==@MENU_OPTIONS[:questions]) %>">
-      <%= link_to "#" do %>
+      <%= link_to questions_path do %>
         <%= content_tag(:span, "", class: "fa fa-university") %>
         <%= "Banco de Questões" %>
       <% end %>

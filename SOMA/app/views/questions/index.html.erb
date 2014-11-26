@@ -1,2 +1,17 @@
-<h1>Questions#index</h1>
-<p>Find me in app/views/questions/index.html.erb</p>
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:questions] } %>
+
+  <div class="col-xs-6 col-sm-9">
+    <%= link_to(new_question_path, class: "btn btn-default") do %>
+      <%= content_tag(:span, "", class: "fa fa-plus") %>
+      <%= "Adicionar nova Questão" %>
+    <% end %>
+
+    <br><br>
+
+    <%= "Questões Disponíveis" %>
+
+    <br><br>
+
+  </div>
+</div>
