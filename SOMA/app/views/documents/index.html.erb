@@ -19,6 +19,7 @@
           <%= image_tag doc.document.url(:small) %>
           <%= link_to doc.get_readable_name, doc.document.url, target: "_blank" %>
           <%= link_to content_tag(:span, "", class: "fa fa-trash-o"), doc, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente este documento? \nEssa ação não poderá ser desfeita." } %>
+          <%= doc.description %>
         </li>
         <br>
       <% end %>
