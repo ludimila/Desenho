@@ -1,5 +1,8 @@
-<% @course.last_updates.reverse.each do |update| %>
-  <h2>
-    <%= update %>
-  </h2>
-<% end %>
+
+<ul class="fa-ul list-group">
+  <% @course.last_updates.reverse.each do |update| %>
+    <h3>
+      <li class="list-group-item"><%= update %></li>
+    </h3>
+  <% end %>
+</ul>

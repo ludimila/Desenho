@@ -9,7 +9,7 @@
     </li>
 
     <li role="presentation" class="<%= "active" if(menu==@MENU_OPTIONS[:documents]) %>">
-      <%= link_to "#" do %>
+      <%= link_to documents_path do %>
         <%= content_tag(:span, "", class: "fa fa-book fa-fw") %>
         <%= "Material disponível" %>
       <% end %>

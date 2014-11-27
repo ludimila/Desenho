@@ -1,13 +1,11 @@
 class DocumentObserver < UpdateObserver
-  def notify_creation(course, attribute)
-    course << "Documento #{course.video.name} adidicionado em #{attribute.created_at.format(:short)}"
+  def self.notify_creation(course, attribute)
+    course << "Documento #{attribute.document_file_name.to_s} adicionado em #{attribute.created_at.to_formatted_s(:short)}"
+    course.save
   end
   
-  def notify_edition(course, attribute)
-    course << "Documento #{course.video.name} editado em #{attribute.updated_at.format(:short)}"
-  end
-  
-  def notify_destuction(course, attribute)
-    course << "Documento #{course.video.name} removido em #{attribute.updated_at.format(:short)}"
+  def self.notify_destruction(course, attribute)
+    course << "Documento #{attribute.document_file_name.to_s} removido em #{attribute.updated_at.to_formatted_s(:short)}"
+    course.save
   end
 end
