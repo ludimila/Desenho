@@ -1,13 +1,16 @@
 class VideoObserver < UpdateObserver
-  def notify_creation(course, attribute)
-    course << "Video #{course.video.name} adidicionado em #{attribute.created_at.format(:short)}"
+  def self.notify_creation(course, attribute)
+    course << "Video #{attribute.description} adidicionado em #{attribute.created_at.to_formatted_s(:short)}"
+    course.save
   end
   
-  def notify_edition(course, attribute)
-    course << "Video #{course.video.name} editado em #{attribute.updated_at.format(:short)}"
+  def self.notify_edition(course, attribute)
+    course << "Video #{attribute.description} editado em #{attribute.updated_at.to_formatted_s(:short)}"
+    course.save
   end
   
-  def notify_destuction(course, attribute)
-    course << "Video #{course.video.name} removido em #{attribute.updated_at.format(:short)}"
+  def self.notify_destruction(course, attribute)
+    course << "Vídeo #{attribute.description} removido em #{attribute.updated_at.to_formatted_s(:short)}"
+    course.save
   end
 end

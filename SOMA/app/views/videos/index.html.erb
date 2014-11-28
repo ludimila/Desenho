@@ -1,0 +1,31 @@
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:videos] } %>
+
+  <div class="col-xs-6 col-sm-9">
+    
+    <%= link_to(new_video_path, class: "btn btn-default") do %>
+      <%= content_tag(:span, "", class: "fa fa-plus") %>
+      <%= "Adicionar novo Videos" %>
+    <% end %>
+
+    <br><br>
+
+    <%= "Vídeos Disponíveis" %>
+
+    <br><br>
+
+    <ul class="fa-ul list-group">
+    <%= will_paginate(@resources, renderer: BootstrapPagination::Rails) %>
+      <% @resources.each do |video| %>
+        <li class="list-group-item">
+        <iframe width="560" height="315" src="//www.youtube-nocookie.com/embed/<%= video.youtube_code %>?rel=0" frameborder="0" allowfullscreen></iframe>
+        <%= video.description %>
+          <%= link_to content_tag(:span, "", class: "fa fa-trash-o"), video, method: :delete , data: { confirm: "Tem certeza que deseja excluir permanentemente este vídeo? \nEle continuará a existir no YouTube." } %>
+        </li>
+        <br>
+      <% end %>
+    </ul>
+
+    <%= will_paginate(@resources, renderer: BootstrapPagination::Rails) %>
+  </div>
+</div>

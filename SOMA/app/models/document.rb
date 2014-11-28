@@ -1,6 +1,5 @@
-class Document < ActiveRecord::Base
+class Document < Resource
   before_destroy :destroy_documents
-  belongs_to :course, inverse_of: :documents
 
   SECRET_NAME = Array.new(5){[*"A".."Z", *"0".."9"].sample}.join
   has_attached_file :document ,{
@@ -18,6 +17,10 @@ class Document < ActiveRecord::Base
   def get_readable_name
     name = self.document_file_name.split('.').first
     name.titleize
+  end
+
+  def document?
+    true
   end
 
   private

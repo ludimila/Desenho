@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :courses
   resources :sessions, only: [:new, :create, :destroy] 
   resources :documents
+  resources :questions
+  resources :videos
 
   match "/users", to: "doctors#index", via: "get", as: "all_users"
   match "/signup", to: "sessions#new", via: "get" 

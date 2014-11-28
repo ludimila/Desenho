@@ -16,14 +16,14 @@
     </li>
 
     <li role="presentation" class="<%= "active" if(menu==@MENU_OPTIONS[:videos]) %>">
-      <%= link_to "#" do %>
+      <%= link_to videos_path do %>
         <%= content_tag(:span, "", class: "fa fa-youtube-play fa-fw") %>
         <%= "Vídeos" %>
       <% end %>
     </li>
 
     <li role="presentation" class="<%= "active" if(menu==@MENU_OPTIONS[:questions]) %>">
-      <%= link_to "#" do %>
+      <%= link_to questions_path do %>
         <%= content_tag(:span, "", class: "fa fa-university") %>
         <%= "Banco de Questões" %>
       <% end %>

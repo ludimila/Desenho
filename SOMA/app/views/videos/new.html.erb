@@ -1,0 +1,23 @@
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:videos] } %>
+
+  <div class="col-xs-6 col-sm-9">
+    
+    <%= form_for(@resource) do |f| %>
+
+      <%= render partial: "shared/errors", locals: { object: @resource } %>
+
+      <%= f.label :description, "Descrição" %>
+      <%= f.text_field :description %>
+
+      <%= f.label :full_url, "Url do Vídeo*:" %>
+      <%= f.text_field :full_url %>
+
+      <%= f.submit("Finalizar", class: "btn btn-primary") %>
+    <% end %>
+    <%= "* Coloque a url do vídeo do youtube!!" %> <br>
+    <%= "Modelos de url: http://www.youtube.com/watch?v=wIJyYjaYcVo" %> <br>
+    <%= "http://youtu.be/wIJyYjaYcVo" %> <br> 
+  </div>
+</div>
+

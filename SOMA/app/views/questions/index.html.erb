@@ -1,0 +1,26 @@
+<div class="row">
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:questions] } %>
+
+  <div class="col-xs-6 col-sm-9">
+    <%= link_to(new_question_path, class: "btn btn-default") do %>
+      <%= content_tag(:span, "", class: "fa fa-plus") %>
+      <%= "Adicionar nova Questão" %>
+    <% end %>
+
+    <br><br>
+
+    <%= "Questões Disponíveis" %>
+
+    <br><br>
+    <ul class="fa-ul list-group">
+    <%= will_paginate(@resources, renderer: BootstrapPagination::Rails) %>
+      <% @resources.each do |question| %>
+        <li class="list-group-item">
+          <%= link_to content_tag(:span, "", class: "fa fa-trash-o"), question, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente esta questão? \nEssa ação não poderá ser desfeita." } %>
+          <%= doc.description %>
+        </li>
+        <br>
+      <% end %>
+    </ul>
+  </div>
+</div>
