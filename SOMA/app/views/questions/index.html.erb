@@ -13,7 +13,8 @@
 
     <br><br>
     <ul class="fa-ul list-group">
-      <% @resources.all.each do |question| %>
+    <%= will_paginate(@resources, renderer: BootstrapPagination::Rails) %>
+      <% @resources.each do |question| %>
         <li class="list-group-item">
           <%= link_to content_tag(:span, "", class: "fa fa-trash-o"), question, method:"delete" , data: { confirm: "Tem certeza que deseja excluir permanentemente esta questão? \nEssa ação não poderá ser desfeita." } %>
           <%= doc.description %>

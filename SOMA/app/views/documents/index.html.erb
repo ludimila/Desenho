@@ -14,7 +14,7 @@
 
     <br><br>
     <ul class="fa-ul list-group">
-      <% @resources.all.each do |doc| %>
+      <% @resources.each do |doc| %>
         <li class="list-group-item">
           <%= image_tag doc.document.url(:small) %>
           <%= link_to doc.get_readable_name, doc.document.url, target: "_blank" %>
