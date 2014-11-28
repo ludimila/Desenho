@@ -8,7 +8,8 @@ class Course < ActiveRecord::Base
   has_many :resources, dependent: :destroy, inverse_of: :course, autosave: true
 
   validates :workload, presence: true, numericality: true
-  validates :name, :doctor_id, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :doctor_id, presence: true
 
   def << (update)
     if(self.last_updates.size == 30)
