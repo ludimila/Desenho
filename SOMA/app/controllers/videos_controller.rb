@@ -12,16 +12,16 @@ class VideosController < ResourcesController
       VideoObserver.notify_destruction(current_course, resource)
     end
 
-    def redirect_to_resource
+    def redirect_to_resources_page
       redirect_to videos_path
     end
 
     def delete_other_resources_from_list(resource)
-      @resources.delete(resource) if !resource.video?
+      @resources << resource if resource.video?
     end
 
     def identify_resource
-      @resource = Video.new
+      @resource = Video.new(video_params)
     end
 
     def notify_resource_creation(resource)
@@ -30,12 +30,20 @@ class VideosController < ResourcesController
     end
 
     def find_repeated_resource
-      if(current_course.resources.find_by(full_url: @resource.full_url))
+      if(current_course.resources.find_by(document_file_name: @resource.full_url))
         flash.now[:error] = "Vídeo já foi adicionado anteriormente!!"
         flash.now[:notice] = "Se quiser editar, clique em editar na descrição do vídeo."
         true
       else
         false
       end
+    end
+
+    def paginate_resource
+      @resources = @resources.paginate(page: params[:page], per_page: Video.per_page)
+    end
+
+    def find_resource
+      @resource = Video.find(params[:id])
     end
 end

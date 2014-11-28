@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
   include ApplicationHelper
+  require "will_paginate/array"
   before_action :get_menu
 
   def create
@@ -15,7 +16,7 @@ class ResourcesController < ApplicationController
   end
 
   def destroy
-    find_resource
+    validate_search
     if(@resource.destroy)
       notify_resource_destruction(@resource)
       flash[:success] = "Recurso removido com sucesso!"
@@ -26,10 +27,12 @@ class ResourcesController < ApplicationController
   end
 
   def index
-    @resources = current_course.resources
-    @resources.each do |res|
+    resources = current_course.resources
+    @resources = []
+    resources.each do |res|
       delete_other_resources_from_list(res)
     end
+    paginate_resource
   end
 
   private
@@ -40,7 +43,7 @@ class ResourcesController < ApplicationController
     def notify_resource_destruction(resource)
     end
 
-    def redirect_to_resource
+    def redirect_to_resources_page
     end
 
     def delete_other_resources_from_list(resource)
@@ -52,7 +55,27 @@ class ResourcesController < ApplicationController
     def notify_resource_creation(resource)
     end
 
+    def find_resource
+    end
+
     def find_repeated_resource
       false
     end
+
+    def paginate_resource
+      @resources = @resources.paginate(page: params[:page], per_page: Resource.per_page)
+    end
+
+    def validate_search
+      begin
+        find_resource
+      rescue ActiveRecord::RecordNotFound => e
+        flash[:error] = "Recurso Não Encontrado!!"
+        redirect_to root_path
+      rescue Exception => e
+        flash[:error] = "#{e.message}. Contate o administrador do sistema."
+        redirect_to root_path
+      end
+    end
+
 end

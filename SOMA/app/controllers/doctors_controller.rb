@@ -10,7 +10,7 @@ class DoctorsController < UsersController
     else
       @users = User.find(users_ids)
     end
-    @users = @users.paginate(:page => params[:page])
+    @users = @users.paginate(:page => params[:page], per_page: 3)
   end
 
   private

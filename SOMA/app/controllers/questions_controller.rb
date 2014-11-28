@@ -23,7 +23,7 @@ class QuestionsController < ResourcesController
     end
 
     def delete_other_resources_from_list(resource)
-      @resources.delete(resource) if !resource.question?
+      @resources << resource if resource.question?
     end
 
     def identify_resource

@@ -17,7 +17,7 @@ class DocumentsController < ResourcesController
     end
 
     def delete_other_resources_from_list(resource)
-      @resources.delete(resource) if !resource.document?
+      @resources << resource if resource.document?
     end
 
     def identify_resource
