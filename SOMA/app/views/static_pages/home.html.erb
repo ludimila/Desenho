@@ -1,2 +1,11 @@
-<%= render "sessions/new" %>
-<%= link_to "Cadastre -se", new_student_path, class: "btn btn-primary btn-lg btn-block" %>
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <%= render 'sessions/new' %>
+
+    <%= link_to "Cadastre -se", new_student_path, class: "btn btn-primary btn-lg btn-block" %>
+  </div>  
+
+  <div class="col-sm-6 col-md-6">
+    <%= image_tag "soma.png", class: "thumbnail img-responsive img-responsive" %>
+  </div>
+</div>

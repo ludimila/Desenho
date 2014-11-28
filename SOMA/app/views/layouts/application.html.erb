@@ -6,11 +6,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+
+<body class="background-style">
 
   <%= render "layouts/header" %>
 
-  <div class="container fluid-container">
+  <div class="container fluid-container <%= controller_name %> <%= action_name %>">
     <% flash.each do |key, value| %>
       <div class="alert <%= bootstrap_class_for(key) %>" role="alert"><%= value %></div>
     <% end %>
