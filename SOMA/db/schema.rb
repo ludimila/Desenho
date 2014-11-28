@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126201200) do
+ActiveRecord::Schema.define(version: 20141128100232) do
 
   create_table "courses", force: true do |t|
     t.integer  "doctor_id"
@@ -29,33 +29,25 @@ ActiveRecord::Schema.define(version: 20141126201200) do
     t.integer "student_id"
   end
 
-  create_table "documents", force: true do |t|
-    t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
-    t.string   "description"
-  end
-
-  add_index "documents", ["course_id"], name: "index_documents_on_course_id", using: :btree
-
   create_table "question_options", force: true do |t|
     t.string "option"
   end
 
-  create_table "questions", force: true do |t|
+  create_table "resources", force: true do |t|
     t.integer  "course_id"
+    t.string   "type"
+    t.string   "description"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.integer  "right_answer",          default: 0
+    t.integer  "options_amount",        default: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "right_answer",   default: 0
-    t.string   "command"
-    t.integer  "options_amount", default: 4
   end
 
-  add_index "questions", ["course_id"], name: "index_questions_on_course_id", using: :btree
+  add_index "resources", ["course_id"], name: "index_resources_on_course_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "rg"
@@ -81,13 +73,5 @@ ActiveRecord::Schema.define(version: 20141126201200) do
     t.string   "city"
     t.string   "state"
   end
-
-  create_table "videos", force: true do |t|
-    t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "videos", ["course_id"], name: "index_videos_on_course_id", using: :btree
 
 end

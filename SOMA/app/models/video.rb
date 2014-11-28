@@ -1,3 +1,5 @@
-class Video < ActiveRecord::Base
-  belongs_to :course, inverse_of: :videos
+class Video < Resource
+  def video?
+    true
+  end
 end
