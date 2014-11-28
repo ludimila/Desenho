@@ -2,11 +2,11 @@
   <%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:questions] } %>
 
   <div class="col-xs-6 col-sm-9">
-    <%= form_for(@question) do |f| %>
-      <%= render partial: "shared/errors", locals: { object: @question } %>
+    <%= form_for(@resource) do |f| %>
+      <%= render partial: "shared/errors", locals: { object: @resource } %>
       
-      <%= f.label :command, "Comando da Questão" %>
-      <%= f.text_field :command %>
+      <%= f.label :description, "Comando da Questão" %>
+      <%= f.text_field :description %>
 
       <%= f.fields_for :question_options do |option| %>
         <%= option.label :option, "teste" %>
