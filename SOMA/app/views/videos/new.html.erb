@@ -1,0 +1,13 @@
+<%= render partial: "courses/doctors/menu", locals: { menu: @MENU_OPTIONS[:documents] } %>
+
+<%= form_for(@resource , :html => { :multipart => true }) do |f| %>
+
+  <%= render partial: "shared/errors", locals: { object: @resource } %>
+
+
+  <%= f.label :description, "Descrição" %>
+  <%= f.text_field :description %>
+
+  <%= f.submit("Finalizar", class: "btn btn-primary") %>
+<% end %>
+
