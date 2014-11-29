@@ -14,3 +14,8 @@ Realize um dos seguintes passos:
   coloque a senha do root como'password'; ou
   coloque a senha escolhida no arquivo config/database.yml no campo senha:
 De um rake db:migrate
+
+
+<a href="https://codeclimate.com/repos/547a2b57695680514315d270/feed"><img src="https://codeclimate.com/repos/547a2b57695680514315d270/badges/d3275fa28843fbf83ef5/gpa.svg" /></a>
+
+
